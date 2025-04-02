@@ -9,6 +9,7 @@ const TodoItem = (props) => {
     return (
         <div className="todo-item" onClick={handleClick}>
             <p className="todo-item-text">{props.name}</p>
+            {props.isImportant && <p>⭐</p>}
         </div>
     );
 };
