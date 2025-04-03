@@ -1,7 +1,8 @@
 import React from "react";
 import "./Sidebar.css";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+    const data = props.todoItem;
     return (
         <div className="sidebar">
             <form className="sb-form">

@@ -1,10 +1,15 @@
 import React from "react";
 
 const TodoItem = (props) => {
-    console.log(props);
+    // console.log(props);
 
     return (
-        <div className="todo-item">
+        <div
+            className="todo-item"
+            onClick={() => {
+                props.handleTodoItemClick(props.id);
+            }}
+        >
             <div style={{ display: "flex", gap: "4px" }}>
                 <input
                     type="checkbox"

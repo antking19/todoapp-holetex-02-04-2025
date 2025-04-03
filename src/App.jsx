@@ -10,6 +10,19 @@ function App() {
         { id: 3, name: "Đi ngủ", isImportant: false, isCompleted: true },
     ]);
 
+    const [activeTodoItemId, setActiveTodoItemId] = useState();
+
+    const [showSidebar, setShowSidebar] = useState(false);
+
+    const activeTodoItem = todoList.find(
+        (todo) => todo.id === activeTodoItemId
+    );
+
+    const handleTodoItemClick = (todoId) => {
+        setShowSidebar(true);
+        setActiveTodoItemId(todoId);
+    };
+
     const handleCompletedCheckBoxChange = (todoId) => {
         const newTodoList = todoList.map((todo) => {
             if (todo.id === todoId) {
@@ -32,6 +45,7 @@ function App() {
                 isImportant={todo.isImportant}
                 isCompleted={todo.isCompleted}
                 handleCompletedCheckBoxChange={handleCompletedCheckBoxChange}
+                handleTodoItemClick={handleTodoItemClick}
             />
         );
     });
@@ -62,7 +76,7 @@ function App() {
                 }}
             />
             <div>{todos}</div>
-            <Sidebar />
+            {showSidebar && <Sidebar todoItem={activeTodoItem} />}
         </div>
     );
 }
