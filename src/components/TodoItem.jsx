@@ -3,12 +3,18 @@ import React from "react";
 const TodoItem = (props) => {
     console.log(props);
 
-    function handleClick() {
-        alert(props.name);
-    }
     return (
-        <div className="todo-item" onClick={handleClick}>
-            <p className="todo-item-text">{props.name}</p>
+        <div className="todo-item">
+            <div style={{ display: "flex", gap: "4px" }}>
+                <input
+                    type="checkbox"
+                    checked={props.isCompleted}
+                    onChange={() => {
+                        props.handleCompletedCheckBoxChange(props.id);
+                    }}
+                />
+                <p className="todo-item-text">{props.name}</p>
+            </div>
             {props.isImportant && <p>⭐</p>}
         </div>
     );
