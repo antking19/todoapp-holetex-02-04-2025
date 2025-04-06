@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 
@@ -9,6 +9,8 @@ const App = () => {
         { id: 3, name: "Học piano" },
     ]);
 
+    const inputRef = useRef();
+
     const todos = todoList.map((todo) => {
         return <TodoItem key={todo.id} name={todo.name} />;
     });
@@ -16,6 +18,7 @@ const App = () => {
     return (
         <div className="container">
             <input
+                ref={inputRef}
                 type="text"
                 name="add-new-task"
                 placeholder="Add new task"
@@ -30,6 +33,7 @@ const App = () => {
                                 name: value,
                             },
                         ]);
+                        inputRef.current.value = "";
                     }
                 }}
             />
