@@ -4,19 +4,32 @@ import TodoItem from "./components/TodoItem";
 
 const App = () => {
     const [todoList, setTodoList] = useState([
-        { id: 1, name: "Đi học thêm", isImportant: false },
-        { id: 2, name: "Đi bơi", isImportant: true },
-        { id: 3, name: "Học piano", isImportant: false },
+        { id: 1, name: "Đi học thêm", isImportant: false, isCompleted: true },
+        { id: 2, name: "Đi bơi", isImportant: true, isCompleted: false },
+        { id: 3, name: "Học piano", isImportant: false, isCompleted: false },
     ]);
 
     const inputRef = useRef();
 
+    const handleCompletedCheckboxChange = (todoId) => {
+        const newTodoList = todoList.map((todo) => {
+            if (todo.id === todoId) {
+                return { ...todo, isCompleted: !todo.isCompleted };
+            }
+            return todo;
+        });
+        setTodoList(newTodoList);
+    };
+
     const todos = todoList.map((todo) => {
         return (
             <TodoItem
+                id={todo.id}
                 key={todo.id}
                 name={todo.name}
                 isImportant={todo.isImportant}
+                isCompleted={todo.isCompleted}
+                handleCompletedCheckboxChange={handleCompletedCheckboxChange}
             />
         );
     });
