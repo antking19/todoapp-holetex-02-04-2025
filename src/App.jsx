@@ -20,6 +20,15 @@ const App = () => {
                 name="add-new-task"
                 placeholder="Add new task"
                 className="task-input"
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        const value = e.target.value;
+                        todoList.push({
+                            id: crypto.randomUUID(),
+                            name: value,
+                        });
+                    }
+                }}
             />
             <div>{todos}</div>
         </div>
