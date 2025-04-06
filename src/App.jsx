@@ -4,15 +4,21 @@ import TodoItem from "./components/TodoItem";
 
 const App = () => {
     const [todoList, setTodoList] = useState([
-        { id: 1, name: "Đi học thêm" },
-        { id: 2, name: "Đi bơi" },
-        { id: 3, name: "Học piano" },
+        { id: 1, name: "Đi học thêm", isImportant: false },
+        { id: 2, name: "Đi bơi", isImportant: true },
+        { id: 3, name: "Học piano", isImportant: false },
     ]);
 
     const inputRef = useRef();
 
     const todos = todoList.map((todo) => {
-        return <TodoItem key={todo.id} name={todo.name} />;
+        return (
+            <TodoItem
+                key={todo.id}
+                name={todo.name}
+                isImportant={todo.isImportant}
+            />
+        );
     });
 
     return (

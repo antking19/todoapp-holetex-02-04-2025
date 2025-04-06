@@ -1,13 +1,10 @@
 import React from "react";
 
 const TodoItem = (props) => {
-    const handleClick = () => {
-        alert(props.name);
-    };
-
     return (
-        <div className="todo-item" onClick={handleClick}>
+        <div className="todo-item">
             <p className="todo-item-text">{props.name}</p>
+            {props.isImportant && <p>⭐</p>}
         </div>
     );
 };
