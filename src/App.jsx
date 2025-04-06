@@ -23,10 +23,13 @@ const App = () => {
                 onKeyDown={(e) => {
                     if (e.key === "Enter") {
                         const value = e.target.value;
-                        todoList.push({
-                            id: crypto.randomUUID(),
-                            name: value,
-                        });
+                        setTodoList([
+                            ...todoList,
+                            {
+                                id: crypto.randomUUID(),
+                                name: value,
+                            },
+                        ]);
                     }
                 }}
             />
