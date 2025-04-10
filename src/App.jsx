@@ -10,8 +10,13 @@ const App = () => {
         { id: 3, name: "Học piano", isImportant: false, isCompleted: false },
     ]);
     const [showSidebar, setShowSidebar] = useState(false);
+    const [activeTodoItemId, showActiveTodoItemId] = useState();
 
     const inputRef = useRef();
+
+    const activeTodoItem = todoList.find(
+        (todo) => todo.id === activeTodoItemId
+    );
 
     const handleCompletedCheckboxChange = (todoId) => {
         const newTodoList = todoList.map((todo) => {
@@ -23,8 +28,9 @@ const App = () => {
         setTodoList(newTodoList);
     };
 
-    const handleTodoItemClick = () => {
-        setShowSidebar(!showSidebar);
+    const handleTodoItemClick = (todoId) => {
+        setShowSidebar(true);
+        showActiveTodoItemId(todoId);
     };
 
     const todos = todoList.map((todo) => {
@@ -64,7 +70,7 @@ const App = () => {
                 }}
             />
             <div>{todos}</div>
-            {showSidebar && <Sidebar />}
+            {showSidebar && <Sidebar todoItem={activeTodoItem} />}
         </div>
     );
 };
