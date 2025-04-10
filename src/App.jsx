@@ -9,6 +9,7 @@ const App = () => {
         { id: 2, name: "Đi bơi", isImportant: true, isCompleted: false },
         { id: 3, name: "Học piano", isImportant: false, isCompleted: false },
     ]);
+    const [showSidebar, setShowSidebar] = useState(false);
 
     const inputRef = useRef();
 
@@ -22,6 +23,10 @@ const App = () => {
         setTodoList(newTodoList);
     };
 
+    const handleTodoItemClick = () => {
+        setShowSidebar(!showSidebar);
+    };
+
     const todos = todoList.map((todo) => {
         return (
             <TodoItem
@@ -31,6 +36,7 @@ const App = () => {
                 isImportant={todo.isImportant}
                 isCompleted={todo.isCompleted}
                 handleCompletedCheckboxChange={handleCompletedCheckboxChange}
+                handleTodoItemClick={handleTodoItemClick}
             />
         );
     });
@@ -58,7 +64,7 @@ const App = () => {
                 }}
             />
             <div>{todos}</div>
-            <Sidebar />
+            {showSidebar && <Sidebar />}
         </div>
     );
 };
