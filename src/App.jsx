@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
+import Sidebar from "./components/Sidebar";
 
 const App = () => {
     const [todoList, setTodoList] = useState([
@@ -57,6 +58,7 @@ const App = () => {
                 }}
             />
             <div>{todos}</div>
+            <Sidebar />
         </div>
     );
 };
