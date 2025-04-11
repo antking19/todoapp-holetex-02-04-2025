@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
+import FilterPanel from "./components/FilterPanel";
 
 const App = () => {
     const [todoList, setTodoList] = useState([
@@ -59,35 +60,38 @@ const App = () => {
 
     return (
         <div className="container">
-            <input
-                ref={inputRef}
-                type="text"
-                name="add-new-task"
-                placeholder="Add new task"
-                className="task-input"
-                onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                        const value = e.target.value;
-                        setTodoList([
-                            ...todoList,
-                            {
-                                id: crypto.randomUUID(),
-                                name: value,
-                            },
-                        ]);
-                        inputRef.current.value = "";
-                    }
-                }}
-            />
-            <div>{todos}</div>
-            {showSidebar && (
-                <Sidebar
-                    key={activeTodoItemId}
-                    todoItem={activeTodoItem}
-                    handleTodoItemChange={handleTodoItemChange}
-                    setShowSidebar={setShowSidebar}
+            <FilterPanel />
+            <div className="main-content">
+                <input
+                    ref={inputRef}
+                    type="text"
+                    name="add-new-task"
+                    placeholder="Add new task"
+                    className="task-input"
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            const value = e.target.value;
+                            setTodoList([
+                                ...todoList,
+                                {
+                                    id: crypto.randomUUID(),
+                                    name: value,
+                                },
+                            ]);
+                            inputRef.current.value = "";
+                        }
+                    }}
                 />
-            )}
+                <div>{todos}</div>
+                {showSidebar && (
+                    <Sidebar
+                        key={activeTodoItemId}
+                        todoItem={activeTodoItem}
+                        handleTodoItemChange={handleTodoItemChange}
+                        setShowSidebar={setShowSidebar}
+                    />
+                )}
+            </div>
         </div>
     );
 };
