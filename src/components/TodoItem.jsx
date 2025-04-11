@@ -10,6 +10,7 @@ const TodoItem = (props) => {
                 <input
                     type="checkbox"
                     checked={props.isCompleted}
+                    onClick={(e) => e.stopPropagation()}
                     onChange={() => {
                         props.handleCompletedCheckboxChange(props.id);
                     }}
