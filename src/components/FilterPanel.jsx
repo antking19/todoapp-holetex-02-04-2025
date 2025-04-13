@@ -24,8 +24,8 @@ const FILTER_ITEMS = [
     },
 ];
 
-const FilterPanel = () => {
-    const [selectedFilterId, setSelectedFilterId] = useState("all");
+const FilterPanel = ({ selectedFilterId, setSelectedFilterId }) => {
+    // const [selectedFilterId, setSelectedFilterId] = useState("all");
 
     return (
         <div className="filter-panel">

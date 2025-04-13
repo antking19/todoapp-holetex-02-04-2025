@@ -10,6 +10,7 @@ const App = () => {
         { id: 2, name: "Đi bơi", isImportant: true, isCompleted: false },
         { id: 3, name: "Học piano", isImportant: false, isCompleted: false },
     ]);
+    const [selectedFilterId, setSelectedFilterId] = useState("all");
     const [showSidebar, setShowSidebar] = useState(false);
     const [activeTodoItemId, showActiveTodoItemId] = useState();
 
@@ -60,7 +61,10 @@ const App = () => {
 
     return (
         <div className="container">
-            <FilterPanel />
+            <FilterPanel
+                selectedFilterId={selectedFilterId}
+                setSelectedFilterId={setSelectedFilterId}
+            />
             <div className="main-content">
                 <input
                     ref={inputRef}
