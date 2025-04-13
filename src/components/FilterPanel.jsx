@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./FilterPanel.css";
 
 const FILTER_ITEMS = [
@@ -25,13 +25,22 @@ const FILTER_ITEMS = [
 ];
 
 const FilterPanel = () => {
+    const [selectedFilterId, setSelectedFilterId] = useState("all");
+
     return (
         <div className="filter-panel">
-            <input type="text" name="search-text" />
+            <input type="text" name="search-text" placeholder="Search" />
             <div className="filter-container">
                 {FILTER_ITEMS.map((filterItem) => {
                     return (
-                        <div className="filter-item">
+                        <div
+                            className={`filter-item ${
+                                filterItem.id === selectedFilterId
+                                    ? "selected"
+                                    : ""
+                            }`}
+                            onClick={() => setSelectedFilterId(filterItem.id)}
+                        >
                             <div className="filter-name">
                                 <img src={filterItem.iconPath} />
                                 <p>{filterItem.label}</p>
