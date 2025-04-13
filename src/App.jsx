@@ -6,9 +6,27 @@ import FilterPanel from "./components/FilterPanel";
 
 const App = () => {
     const [todoList, setTodoList] = useState([
-        { id: 1, name: "Đi học thêm", isImportant: false, isCompleted: true },
-        { id: 2, name: "Đi bơi", isImportant: true, isCompleted: false },
-        { id: 3, name: "Học piano", isImportant: false, isCompleted: false },
+        {
+            id: 1,
+            name: "Đi học thêm",
+            isImportant: false,
+            isCompleted: true,
+            isDeleted: false,
+        },
+        {
+            id: 2,
+            name: "Đi bơi",
+            isImportant: true,
+            isCompleted: false,
+            isDeleted: false,
+        },
+        {
+            id: 3,
+            name: "Học piano",
+            isImportant: false,
+            isCompleted: false,
+            isDeleted: false,
+        },
     ]);
     const [selectedFilterId, setSelectedFilterId] = useState("all");
     const [showSidebar, setShowSidebar] = useState(false);
@@ -45,19 +63,36 @@ const App = () => {
         showActiveTodoItemId(todoId);
     };
 
-    const todos = todoList.map((todo) => {
-        return (
-            <TodoItem
-                id={todo.id}
-                key={todo.id}
-                name={todo.name}
-                isImportant={todo.isImportant}
-                isCompleted={todo.isCompleted}
-                handleCompletedCheckboxChange={handleCompletedCheckboxChange}
-                handleTodoItemClick={handleTodoItemClick}
-            />
-        );
-    });
+    const todos = todoList
+        .filter((todo) => {
+            switch (selectedFilterId) {
+                case "all":
+                    return true;
+                case "completed":
+                    return todo.isCompleted;
+                case "important":
+                    return todo.isImportant;
+                case "deleted":
+                    return todo.isDeleted;
+                default:
+                    return true;
+            }
+        })
+        .map((todo) => {
+            return (
+                <TodoItem
+                    id={todo.id}
+                    key={todo.id}
+                    name={todo.name}
+                    isImportant={todo.isImportant}
+                    isCompleted={todo.isCompleted}
+                    handleCompletedCheckboxChange={
+                        handleCompletedCheckboxChange
+                    }
+                    handleTodoItemClick={handleTodoItemClick}
+                />
+            );
+        });
 
     return (
         <div className="container">
@@ -80,6 +115,9 @@ const App = () => {
                                 {
                                     id: crypto.randomUUID(),
                                     name: value,
+                                    isImportant: false,
+                                    isCompleted: false,
+                                    isDeleted: false,
                                 },
                             ]);
                             inputRef.current.value = "";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./FilterPanel.css";
 
 const FILTER_ITEMS = [
