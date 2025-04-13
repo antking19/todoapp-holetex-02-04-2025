@@ -63,7 +63,7 @@ const App = () => {
         showActiveTodoItemId(todoId);
     };
 
-    const todos = todoList
+    const filteredTodos = todoList
         .filter((todo) => {
             switch (selectedFilterId) {
                 case "all":
@@ -124,7 +124,7 @@ const App = () => {
                         }
                     }}
                 />
-                <div>{todos}</div>
+                <div>{filteredTodos}</div>
                 {showSidebar && (
                     <Sidebar
                         key={activeTodoItemId}
